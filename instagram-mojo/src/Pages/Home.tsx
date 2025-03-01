@@ -21,6 +21,7 @@ export interface IUserBasic {
 export interface IApiiCall {
   success: boolean;
   user_basic: IUserBasic;
+  access_token: string;
 }
 
 const dummyData: IUserBasic = {
@@ -96,6 +97,7 @@ const Home = () => {
         const userData = await basic_insta(code);
         console.log(userData);
         setUser(userData!.user_basic);
+        localStorage.setItem("accessToken", userData!.access_token);
       } else {
         console.log("could not found token or code");
       }

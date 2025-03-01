@@ -61,7 +61,7 @@ export const handleAuth = async (
     console.log("this is user_baic ", user_basic);
 
     res.cookie("token", permToken, {maxAge:50000, httpOnly:true});
-    res.json({success:true, user_basic});
+    res.json({success:true, user_basic, accessToken: permToken});
     return;
   } catch(e){
     return console.log(e)
