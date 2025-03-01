@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { codeToTempToken, insta_basic,  tempTokenToPermToken } from "../middleware/instaApi";
+import { codeToTempToken, getConvoList, insta_basic,  tempTokenToPermToken } from "../middleware/instaApi";
 
 
 export const testing = async(
@@ -73,9 +73,21 @@ export const handleAuth = async (
 export const userInfo = async(req:Request, res:Response)=> {
   try {
     const token = req.params.token;
-    console.log("token ", token);
     const user_basic = await insta_basic(token);
+    console.log("user ", user_basic);
     res.json({user_basic, success:true});
+  } catch(e){
+    res.json({error: e, success:false})
+  }
+}
+
+
+
+export const userConvoList = async(req:Request, res:Response)=> {
+  try{
+    const token = req.params.token;
+    const convoList = await getConvoList(token);
+    res.json({convoList, success:true});
   } catch(e){
     res.json({error: e, success:false})
   }

@@ -6,7 +6,7 @@ import RecomCard from "../Components/RecomCard";
 import EngagementCard from "../Components/Engagement";
 import ConnectInsta from "../Components/ConnectInsta";
 import Loading from "../Components/Loading";
-import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export interface IUserBasic {
   id: String;
@@ -38,6 +38,8 @@ const dummyData: IUserBasic = {
 const Home = () => {
   const [user, setUser] = useState<IUserBasic | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   const token_basic_insta = async (
     token: String
@@ -81,30 +83,34 @@ const Home = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      let token = Cookies.get("token");
+      // let token = Cookies.get("token");
+      // console.log("BEFORE token ", access_token);
 
-      console.log("BEFORE token ", token);
-      const code = localStorage.getItem("code");
+      // let access_token = localStorage.getItem("accessToken");
 
-      console.log("this is the code in home ", code);
-      // if (token) {
-      //   console.log("found token ", token);
-      //   const userData = await token_basic_insta(token);
+      // if (access_token) {
+      //   console.log("found token ", access_token);
+      //   const userData = await token_basic_insta(access_token);
       //   setUser(userData!.user_basic);
       // } else {
-      if (code) {
-        console.log("found code but not token");
-        const userData = await basic_insta(code);
-        console.log(userData);
-        setUser(userData!.user_basic);
-        localStorage.setItem("accessToken", userData!.access_token);
-      } else {
-        console.log("could not found token or code");
-      }
+        console.log("Token unidentifed or not workin");
+        const code = localStorage.getItem("code");
+        if (code) {
+          console.log("found code but not token");
+          const userData = await basic_insta(code);
+          console.log(userData);
+          setUser(userData!.user_basic);
+          console.log(userData!.access_token);
+          localStorage.setItem("accessToken", userData!.access_token);
+        } else {
+          console.log("could not found token or code");
+          navigate("/");
+        }
       // }
 
-      token = Cookies.get("token");
-      console.log("AFTER token ", token);
+      // token = Cookies.get("token");
+      // console.log("AFTER token ", token);
+      console.log(localStorage.getItem("accessToken"));
 
       setIsLoading(false);
     };

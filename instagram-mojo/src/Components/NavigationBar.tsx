@@ -1,4 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 const NavigationBar = () => {
+  const navigate = useNavigate();
+
+  const handleMessage = ()=> {
+    navigate("/message");
+  }
+
+
   return (
     <>
       <nav className="bg-black p-4 shadow-lg">
@@ -16,6 +25,9 @@ const NavigationBar = () => {
             </h1>
           </div>
           <div className="flex items-center space-x-4">
+            <div>
+              <button onClick={()=>handleMessage}>Messages</button>
+            </div>
             <button className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors">
               <svg
                 className="w-5 h-5"
@@ -58,6 +70,5 @@ const NavigationBar = () => {
     </>
   );
 };
-
 
 export default NavigationBar;

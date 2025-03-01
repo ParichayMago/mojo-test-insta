@@ -68,6 +68,19 @@ export const insta_basic = async (access_token: String): Promise<IUserBasic> => 
   }
 };
 
+export const getConvoList = async (access_token:String):Promise<any> => {
+  try{
+    const resp = await fetch(`https://graph.instagram.com/v22.0/me/conversations?platform=instagram&access_token=${access_token}`)
+    
+    const data = resp.json();
+    return data;
+  } catch(e) {
+  }
+}
+interface IUserConvo {
+
+}
+
 interface IUserBasic {
   id: string; 
   username: string;

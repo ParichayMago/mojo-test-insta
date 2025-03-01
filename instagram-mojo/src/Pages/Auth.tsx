@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { instaLogo, tickMark } from "../assets/icons";
-import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
   const [hover, setHover] = useState(false);
+  const navigate = useNavigate();
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   // Check if token exists in localStorage
+  //   const token = localStorage.getItem("accessToken");
     
-    const token = Cookies.get("token");
-    console.log("Token from cookie:", token);
-  }, []);
+  //   console.log("Token status:", token ? "Found" : "Not found");
+    
+  //   if (token) {
+  //     console.log("Token found, navigating to home");
+  //     navigate("/home");
+  //   }
+  // }, [navigate]);
 
   const handleLogin = () => {
     location.href =
